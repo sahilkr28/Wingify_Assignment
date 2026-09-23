@@ -41,24 +41,21 @@ test.describe('Dream Portal - Home Page', () => {
         await homePage.expectDreamButtonEnabled();
     });
 
-    test('TC-05: My Dreams should open the Dreams Diary page', async () => {
-        const context = homePage.page.context();
-        const initialPages = context.pages();
+    test('TC-05: My Dreams should open the Dreams Diary page', async ({ page, context }) => {
+        const homePage = new HomePage(page);
+
+        await homePage.goto();
+        await homePage.expectDreamButtonVisible();
+
+        const newPagePromise = context.waitForEvent('page');
 
         await homePage.clickMyDreams();
 
-        await expect
-            .poll(() => context.pages().length, {
-                timeout: 5000,
-                message: 'Expected My Dreams to open a new tab',
-            })
-            .toBeGreaterThan(initialPages.length);
+        const newPage = await newPagePromise;
 
-        const newPages = context.pages().slice(initialPages.length);
+        await newPage.waitForLoadState('domcontentloaded');
 
-        await newPages[0].waitForLoadState();
-
-        expect(newPages[0].url()).toContain('dreams-diary.html');
+        expect(newPage.url()).toContain('dreams-diary.html');
     });
 
     test('TC-06: My Dreams should open the Dreams Total page', async () => {
