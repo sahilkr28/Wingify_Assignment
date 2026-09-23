@@ -22,6 +22,16 @@ Wingify_Assignment/
 │   └── workflows/
 │       └── playwright.yml
 │
+├── screenshots/
+│   ├── 01-home-loader.png
+│   ├── 02-home-loaded.png
+│   ├── 03-dreams-diary.png
+│   ├── 04-dreams-total.png
+│   ├── 05-playwright-report(1).png
+│   ├── 05-playwright-report(2).png
+│   ├── 06-allure-report.png
+│   └── 07-github-actions.png
+│
 ├── tests/
 │   ├── pages/
 │   │   ├── HomePage.ts
