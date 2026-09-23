@@ -42,7 +42,7 @@ ${dreamNames.map((dream, index) => `${index + 1}. ${dream}`).join('\n')}
         for (let attempt = 1; attempt <= 3; attempt++) {
             try {
                 response = await this.ai.models.generateContent({
-                    model: 'gemini-3.6-flash',
+                    model: 'gemini-3.1-flash-lite',
                     contents: prompt,
                 });
 
