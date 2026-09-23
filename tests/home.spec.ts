@@ -47,15 +47,18 @@ test.describe('Dream Portal - Home Page', () => {
         await homePage.goto();
         await homePage.expectDreamButtonVisible();
 
-        const newPagePromise = context.waitForEvent('page');
+        const diaryPagePromise = context.waitForEvent('page', {
+            predicate: newPage =>
+                newPage.url().includes('dreams-diary.html'),
+        });
 
         await homePage.clickMyDreams();
 
-        const newPage = await newPagePromise;
+        const diaryPage = await diaryPagePromise;
 
-        await newPage.waitForLoadState('domcontentloaded');
+        await diaryPage.waitForLoadState('domcontentloaded');
 
-        expect(newPage.url()).toContain('dreams-diary.html');
+        expect(diaryPage.url()).toContain('dreams-diary.html');
     });
 
     test('TC-06: My Dreams should open the Dreams Total page', async () => {
